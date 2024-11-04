@@ -1,0 +1,21 @@
+.usercab__text {
+  display: block;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.usercab__title {
+  font-size: 23px;
+  font-weight: bold;
+  margin: 50px auto 40px auto;
+}
+.history__desc {
+  margin-top: 50px;
+  text-align: center;
+}
+.history {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}

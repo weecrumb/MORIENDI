@@ -1,0 +1,171 @@
+.link {
+  transition: 0.3s;
+}
+.link:hover {
+  border-bottom: 1px solid #828282;
+}
+/* !header */
+
+.header__container {
+  padding-top: 40px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.header__cart-link {
+  display: flex;
+  position: relative;
+  transition: 0.3s;
+}
+.header__cart-link:active {
+  transform: scale(0.95);
+}
+.header__cart-link::after {
+  content: "0";
+  font-size: 10px;
+  font-family: "Montserrat-Regular";
+  position: absolute;
+  top: -8px;
+  right: -8px;
+}
+
+.header__cart-img {
+  width: 20px;
+}
+
+.header__logo-img {
+  transition: 0.3s;
+}
+
+.header__logo-img:hover {
+  margin-left: 10px;
+}
+
+.header__logo-img {
+  width: 200px;
+}
+
+.header__user-menu {
+  display: flex;
+  justify-content: space-between;
+  gap: 15px;
+}
+
+/* !header */
+
+/* !main */
+
+/* общее */
+.main__container {
+  padding-top: 20px;
+  display: flex;
+}
+/* menu navbar */
+.navigation {
+  width: 300px;
+}
+.navigation__list {
+  position: sticky;
+  top: 100px;
+  text-align: right;
+}
+.navigation__item {
+  margin-top: 15px;
+}
+.navigation__item:first-child {
+  margin-top: 85px;
+}
+
+.navigation__link {
+  color: #828282;
+  transition: 0.3s;
+}
+.navigation__link:hover {
+  color: #000;
+}
+/* menu navbar */
+
+/* cards items */
+.main__cards {
+  display: flex;
+  flex-wrap: wrap;
+}
+.cards {
+  margin-left: 20px;
+}
+.cards__item {
+  width: 372px;
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+}
+.cards__item-img {
+  cursor: pointer;
+}
+.cards__item-link {
+  margin-top: 10px;
+  cursor: pointer;
+}
+.cards__item-link,
+.cards__item-desc {
+  font-size: 12px;
+}
+.cards__item-desc {
+  margin-top: 5px;
+}
+.line {
+  margin: 0 auto;
+  margin: 10px auto 5px auto;
+  width: 100%;
+  border: 1px dashed #828282;
+}
+/* cards items */
+
+/* !main */
+
+/* !footer */
+.footer__container {
+  text-align: center;
+  font-size: 14px;
+}
+
+.footer__link:nth-child(2) {
+  margin-left: 20px;
+}
+.footer-desc {
+  font-size: 13px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+/* !footer */
+
+@media (max-width: 1512px) {
+  .container {
+    width: 1366px;
+  }
+  .main__cards {
+    width: 770px;
+  }
+  .navigation {
+    width: 340px;
+  }
+}
+
+@media (max-width: 720px) {
+}
+
+.formreg {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.formreg input,
+button {
+  width: 200px;
+  height: 30px;
+}
+.formreg button {
+  margin-top: 50px;
+}
