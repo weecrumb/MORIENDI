@@ -71,7 +71,8 @@
 					<p>итого</p>
 					<p>12500₱</p>
 				</div>
-				<button class="btn-cart">оформить заказ</button>
+				<a href="order.php"><button class="btn-cart">оформить заказ</button></a>
+
 			</div>
 		</section>
 	</main>
