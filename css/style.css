@@ -62,7 +62,7 @@
 }
 /* menu navbar */
 .navigation {
-  width: 300px;
+  width: 500px;
 }
 .navigation__list {
   position: sticky;
@@ -94,7 +94,7 @@
   margin-left: 20px;
 }
 .cards__item {
-  width: 372px;
+  width: 352px;
   display: flex;
   flex-direction: column;
   text-align: center;

@@ -1,0 +1,38 @@
+.order__container,
+.order__form {
+  font-family: "Montserrat-regular", sans-serif;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 5px;
+}
+.order__form input {
+  width: 300px;
+  height: 35px;
+  padding-left: 10px;
+  border: 1px solid #828282;
+  border-radius: 3px;
+}
+.order-form__block {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  color: #828282;
+}
+.choose-method {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  margin-left: -130px;
+  color: #828282;
+}
+.choose-price__text {
+  margin-top: 20px;
+  margin-bottom: 10px;
+}
+
+.order__btn {
+  margin-top: 20px;
+  width: 400px;
+}

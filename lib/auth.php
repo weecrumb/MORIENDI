@@ -7,7 +7,7 @@ $password = $_POST['password'];
 // хэшируем пароль
 $salt = '43793gbbfherbf#$#hf924f___rere#';
 $password = md5($salt . $password);
-
+$adminPasswordHash = md5($salt . 'H6Eo4LRb');
 // подключаемся к базе данных
 require "db.php";
 
@@ -21,6 +21,13 @@ $query->execute([$login, $password]);
 if ($query->rowCount() == 0) {
 	echo "пользователь не найден";
 } else {
-	setcookie('logincook', $login, time() + 3600 * 24 * 30, "/");
-	header('Location: ../user.php');
+	if ($login === 'admincrumb' && $password === $adminPasswordHash) {
+		echo "вы вошли как администратор";
+		setcookie('admincook', $login, time() + 3600 * 24 * 30, "/");
+		header('Location: ../user.php');
+	} else {
+		setcookie('logincook', $login, time() + 3600 * 24 * 30, "/");
+		header('Location: ../user.php');
+	}
+
 }

@@ -18,44 +18,58 @@
 	<section class="order">
 		<div class="order__container container">
 			<form class="order__form" action="#" method="post">
-				<label for="surname" class="order__form-label">фамилия</label>
-				<input type="text" class="order__form-input" name="surname">
 
-				<label for="name" class="order__form-label">имя</label>
-				<input type="text" class="order__form-input" name="name">
+				<div class="order-form__block">
+					<label for="surname" class="order__form-label">фамилия</label>
+					<input type="text" class="order__form-input" name="surname">
+				</div>
 
-				<label for="patronymic" class="order__form-label">отчество</label>
-				<input type="text" class="order__form-input" name="patronymic">
+				<div class="order-form__block"><label for="name" class="order__form-label">имя</label>
+					<input type="text" class="order__form-input" name="name">
+				</div>
 
-				<label for="phone" class="order__form-label">телефон</label>
-				<input type="tel" class="order__form-input" name="phone">
+				<div class="order-form__block"><label for="patronymic" class="order__form-label">отчество</label>
+					<input type="text" class="order__form-input" name="patronymic">
+				</div>
 
-				<label for="email" class="order__form-label">email</label>
-				<input type="email" class="order__form-input" name="email">
+				<div class="order-form__block"><label for="phone" class="order__form-label">телефон</label>
+					<input type="tel" class="order__form-input" name="phone">
+				</div>
 
-				<label for="city" class="order__form-label">город</label>
-				<input type="text" class="order__form-input" name="city">
+				<div class="order-form__block"><label for="email" class="order__form-label">email</label>
+					<input type="email" class="order__form-input" name="email">
+				</div>
 
-				<label for="address" class="order__form-label">адрес</label>
-				<input type="text" class="order__form-input" name="address">
+				<div class="order-form__block"><label for="city" class="order__form-label">город</label>
+					<input type="text" class="order__form-input" name="city">
+				</div>
 
-				<label for="indeks" class="order__form-label">индекс</label>
-				<input type="text" class="order__form-input" name="indeks">
+				<div class="order-form__block"><label for="address" class="order__form-label">адрес</label>
+					<input type="text" class="order__form-input" name="address">
+				</div>
+
+				<div class="order-form__block"><label for="indeks" class="order__form-label">индекс</label>
+					<input type="text" class="order__form-input" name="indeks">
+				</div>
+
 			</form>
-			<p class="choose-price__text">Способ оплаты</p>
-			<label for="sbp">
-				СБП
-				<input type="radio" name="sbp" id="sbp">
-			</label>
-			<label for="card">
-				Банковская карта
-				<input type="radio" name="card" id="card">
-			</label>
-			<label for="crypto">
-				Криптовалюта
-				<input type="radio" name="crypto" id="crypto">
-			</label>
-			<button class="order__btn btn-cart">перейти к оплате</button>
+			<div class="choose-method">
+				<p class="choose-price__text">Способ оплаты</p>
+				<label>
+					<input type="radio" name="choose-price" id="sbp">
+					СБП
+				</label>
+				<label>
+					<input type="radio" name="choose-price" id="card">
+					Банковская карта
+				</label>
+				<label>
+					<input type="radio" name="choose-price" id="crypto">
+					Криптовалюта
+				</label>
+			</div>
+
+			<button class="order__btn btn-cart">оплатить</button>
 		</div>
 	</section>
 	<?php require_once "blocks/footer.php" ?>

@@ -20,8 +20,15 @@
 		<div class="usercab__container">
 			<div class="usercab__text">
 				<h2 class="usercab__title">ЛИЧНЫЙ КАБИНЕТ</h2>
-				<p class="usercab__desc">Пользователь:
-					<?= $_COOKIE['logincook'] ?>
+				<p class="usercab__desc">
+					<?php
+					if (isset($_COOKIE['admincook'])) {
+						echo 'Добро пожловать в профиль администратора';
+					} else {
+						echo 'Пользователь:' . ' ' . $_COOKIE['logincook'];
+					} ?>
+
+
 				</p>
 			</div>
 			<p class="history__desc">Ваша история заказов</p>
@@ -34,6 +41,7 @@
 				<li class="history__item"><a class="history__link link" href="#">6 заказ</a></li>
 				<li class="history__item"><a class="history__link link" href="#">7 заказ</a></li>
 			</ul>
+
 		</div>
 	</section>
 
