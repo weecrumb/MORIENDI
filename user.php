@@ -15,7 +15,6 @@
 
 <body>
 	<?php require_once "blocks/header.php" ?>
-
 	<section class="usercab">
 		<div class="usercab__container">
 			<div class="usercab__text">
