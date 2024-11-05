@@ -31,21 +31,61 @@
 
 				</p>
 			</div>
-			<p class="history__desc">Ваша история заказов</p>
-			<ul class="usercab__history history">
-				<li class="history__item"><a class="history__link link" href="#">1 заказ</a></li>
-				<li class="history__item"><a class="history__link link" href="#">2 заказ</a></li>
-				<li class="history__item"><a class="history__link link" href="#">3 заказ</a></li>
-				<li class="history__item"><a class="history__link link" href="#">4 заказ</a></li>
-				<li class="history__item"><a class="history__link link" href="#">5 заказ</a></li>
-				<li class="history__item"><a class="history__link link" href="#">6 заказ</a></li>
-				<li class="history__item"><a class="history__link link" href="#">7 заказ</a></li>
-			</ul>
+			<?php
+			if (isset($_COOKIE['admincook'])) {
+			} else {
+				echo '
+					<p class="history__desc">Ваша история заказов</p>
+					<ul class="usercab__history history">
+						<li class="history__item"><a class="history__link link" href="#">1 заказ</a></li>
+						<li class="history__item"><a class="history__link link" href="#">2 заказ</a></li>
+						<li class="history__item"><a class="history__link link" href="#">3 заказ</a></li>
+						<li class="history__item"><a class="history__link link" href="#">4 заказ</a></li>
+						<li class="history__item"><a class="history__link link" href="#">5 заказ</a></li>
+						<li class="history__item"><a class="history__link link" href="#">6 заказ</a></li>
+						<li class="history__item"><a class="history__link link" href="#">7 заказ</a></li>
+					</ul>
+				';
+			} ?>
+
+
+
+
+			<?php
+			if (isset($_COOKIE['admincook'])) {
+				echo '
+					<div class="admin-add container">
+						<ul class="admin__links">
+							<li><a href="#" id="open-popup" class="link">Добавить товар</a></li>
+							
+							<div class="popup" id="popup">
+								<div class="popup-content">
+									<span class="close-popup" id="close-popup">&times;</span>
+									<form action="lib/additem.php" method="post" class="form-add">
+											<label>Изображение</label>
+											<input type="file" name="image">
+											<label>Название</label>
+											<input type="text" name="name">
+											<label>Цена</label>
+											<input type="text" name="price">
+											<button class="btn-cart addcard-btn" type="submit">Добавить товар</button>
+									</form>
+								</div>
+							</div>
+
+							<li><a href="#" class="link link-add">Просмотр заказов</a></li>
+						</ul>
+					</div>
+					';
+			}
+			?>
+
 
 		</div>
 	</section>
 
 	<?php require_once "blocks/footer.php" ?>
+	<script src="script.js"></script>
 </body>
 
 </html>

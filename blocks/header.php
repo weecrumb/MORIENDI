@@ -4,12 +4,17 @@
 				class="header__logo-img logo-img"></a>
 		<div class="header__user-menu">
 			<?php
-			if (isset($_COOKIE['logincook'])) {
-				echo '<a href="user.php" class="reg__link link">Личный кабинет</a>
+			if (isset($_COOKIE['admincook'])) {
+				echo '<a href="user.php" class="reg__link link">Кабинет ПАПЫ</a>
 					<a href="lib/logout.php" class="reg__link link">Выйти</a>';
 			} else {
-				echo '<a href="reg.php" class="reg__link link">Регистрация</a>
+				if (isset($_COOKIE['logincook'])) {
+					echo '<a href="user.php" class="reg__link link">Личный кабинет</a>
+					<a href="lib/logout.php" class="reg__link link">Выйти</a>';
+				} else {
+					echo '<a href="reg.php" class="reg__link link">Регистрация</a>
 					<a href="auth.php" class="reg__link link">Авторизация</a>';
+				}
 			}
 			?>
 
