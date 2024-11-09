@@ -33,9 +33,13 @@
 				$query->execute();
 				$cards = $query->fetchAll(PDO::FETCH_OBJ);
 				foreach ($cards as $el) {
+					// разделяем строку с изображениями на массив
+					$image = explode(',', $el->image);
+					// берём только первое изображение
+					$firstImage = trim($image[0]);
 					echo '
 						<div class="cards__item">
-							<img src="image/' . $el->image . '" alt="кроссовки" class="cards__item-img">
+							<img src="image/products/' . $firstImage . '" alt="кроссовки" class="cards__item-img">
 							<a href="item.php?id=' . $el->id . '" class="cards__item-link">' . $el->name . '</a>
 							<p class="cards__item-desc">' . $el->price . ' ₽</p>
 						</div>

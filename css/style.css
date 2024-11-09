@@ -89,6 +89,7 @@
 .main__cards {
   display: flex;
   flex-wrap: wrap;
+  align-items: center;
 }
 .cards {
   margin-left: 20px;
