@@ -1,3 +1,30 @@
+<?php
+require_once 'lib/db.php';
+// получаем id товара из URL
+if (isset($_GET['id'])) {
+	$productId = (int) $_GET['id'];
+
+	// получаем информацию из БД по id товара
+	$sql = "SELECT * FROM products WHERE id = :id";
+	$query = $pdo->prepare($sql);
+	$query->execute(['id' => $productId]);
+	$product = $query->fetch(PDO::FETCH_ASSOC);
+
+
+	//если товара нет, то перенаправляем на главную страницу
+	if (!$product) {
+		header('Location: index.php');
+		exit();
+	}
+} else {
+	// если id не передан, перенаправляем на главную страницу 
+	header('Location: index.php');
+	exit();
+}
+$product['image'] = explode(',', $product['image']);
+$product['size'] = explode(';', $product['size']);
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -16,51 +43,64 @@
 	<?php require_once "blocks/header.php" ?>
 	<main class="main">
 		<div class="main__container container">
-			<div class="maincard__slider slide">
-				<img id="mainImage" src="image/slider-item/item-slide-1.jpg" alt="" class="item__main-slide">
-				<ol class="maincard__slider-list slider-list">
-					<li class="slider-list__item"><img id="thumbnail" src="image/slider-item/item-slide-1.jpg" alt=""
-							class="slider-list__item-img" onclick="changeImage('image/slider-item/item-slide-1.jpg')">
-					</li>
-					<li class="slider-list__item">
-						<img id="thumbnail" src="image/slider-item/item-slide-2.jpg" alt="" class="slider-list__item-img"
-							onclick="changeImage('image/slider-item/item-slide-2.jpg')">
-					</li>
-					<li class="slider-list__item"><img id="thumbnail" src="image/slider-item/item-slide-3.jpg" alt=""
-							class="slider-list__item-img" onclick="changeImage('image/slider-item/item-slide-3.jpg')"></li>
-					<li class="slider-list__item"><img id="thumbnail" src="image/slider-item/item-slide-4.jpg" alt=""
-							class="slider-list__item-img" onclick="changeImage('image/slider-item/item-slide-4.jpg')"></li>
-					<li class="slider-list__item"><img id="thumbnail" src="image/slider-item/item-slide-5.jpg" alt=""
-							class="slider-list__item-img" onclick="changeImage('image/slider-item/item-slide-5.jpg')"></li>
-					<li class="slider-list__item"><img id="thumbnail" src="image/slider-item/item-slide-6.jpg" alt=""
-							class="slider-list__item-img" onclick="changeImage('image/slider-item/item-slide-6.jpg')"></li>
-				</ol>
-			</div>
-			<div class="maincard">
-				<h2 class="maincard__title">ALEXANDR MORIENDI BUFFS in WHITE</h2>
-				<p class="maincard__text">предзаказ</p>
-				<ul class="maincard__list">
-					<li class="maincard__list-item">соответствует размеру</li>
-					<li class="maincard__list-item">100% нубук</li>
-					<li class="maincard__list-item">брендированная подошва и стелька</li>
-					<li class="maincard__list-item">пушистый материал внутри</li>
-					<li class="maincard__list-item">ПВХ лейблы с 3D-текстом</li>
-					<li class="maincard__list-item">широкие шнурки</li>
-					<li class="maincard__list-item">тиснение логотипа на заднике</li>
-					<li class="maincard__list-item">брендированная коробка на магнитах</li>
-					<li class="maincard__list-item">отправка с 1-14 ноября</li>
-				</ul>
-				<p class="maincard__price">12000₽</p>
-				<div class="maincard__size-guide size-guide">
-					<a href="#" class="size-guide__link">SIZE GUIDE</a>
-					<img src="image/table.png" alt="ТАБЛИЦА РАЗМЕРОВ" class="size-guide__img">
+			<!-- слайдер -->
+			<?php if (count($product['image']) > 1): ?>
+				<div class="maincard__slider slide">
+
+					<!-- главная картинка в слайдере -->
+					<img id="mainImage" src="image/products/<?php echo htmlspecialchars($product['image'][0]); ?>" alt=""
+						class="item__main-slide">
+
+					<!-- список картинок для слайдера -->
+					<ol class="maincard__slider-list slider-list">
+						<?php foreach ($product['image'] as $image): ?>
+							<li class="slider-list__item">
+								<img id="thumbnail" src="image/products/<?php echo htmlspecialchars($image); ?>" alt=""
+									class="slider-list__item-img"
+									onclick="changeImage('image/products/<?php echo htmlspecialchars($image); ?>')">
+							</li>
+						<?php endforeach; ?>
+					</ol>
 				</div>
+			<?php else: ?>
+				<!-- елси изображение только одно -->
+				<img id="mainImage" src="image/products/<?php echo htmlspecialchars($product['image'][0]); ?>" alt=""
+					class="item__main-slide">
+			<?php endif; ?>
+			<!-- описание карточки товара -->
+			<div class="maincard">
+				<!-- заголовок товара -->
+				<h2 class="maincard__title">
+					<?php echo htmlspecialchars($product['name']); ?>
+				</h2>
+				<!-- описание товара -->
+				<?php $descriptionLines = explode(';', $product['description']); ?>
+				<ul class="maincard__list">
+					<?php foreach ($descriptionLines as $line): ?>
+						<li class="maincard__list-item">
+							<?php echo htmlspecialchars(trim($line)); ?>
+						</li>
+					<?php endforeach; ?>
+				</ul>
+				<!-- цена товара -->
+				<p class="maincard__price">
+					<?php echo htmlspecialchars($product['price']); ?>₽
+				</p>
+				<!-- табличка или изображение с информацией как выбрать товар -->
+				<div class="maincard__size-guide size-guide">
+					<a id="sizeGuideLink" href="#" class="size-guide__link">SIZE GUIDE</a>
+					<img id="sizeGuideImage" src="image/table.png" alt="ТАБЛИЦА РАЗМЕРОВ" class="size-guide__img">
+				</div>
+				<!-- выбор размера -->
 				<select name="select-size" id="select-size" class="select__size">
-					<option value="value 1" selected>размер</option>
-					<option value="value 2">44EU / 10US / 9UK / 28СМ</option>
-					<option value="value 3">42EU / 9US / 8UK / 27СМ</option>
-					<option value="value 4">40EU / 8US / 7UK / 26СМ</option>
+					<option value="" selected>размер</option>
+					<?php foreach ($product['size'] as $size): ?>
+						<option value="<?php echo htmlspecialchars(trim($size)); ?>">
+							<?php echo htmlspecialchars(trim($size)); ?>
+						</option>
+					<?php endforeach; ?>
 				</select>
+				<!-- кнопка заказать -->
 				<button class="btn btn-add">заказать</button>
 			</div>
 		</div>
@@ -73,7 +113,23 @@
 			document.getElementById('mainImage').src = imageSrc;
 		}
 
+		// функционал выбора размера
+		const sizeGuideLink = document.getElementById('sizeGuideLink');
+		const sizeGuideImage = document.getElementById('sizeGuideImage');
+		// Добавляем обработчик события на клик по ссылке
+		sizeGuideLink.addEventListener('click', function (event) {
+			event.preventDefault(); // Предотвращаем переход по ссылке
+			// Проверяем текущее состояние отображения изображения
+			const isImageVisible = window.getComputedStyle(sizeGuideImage).display !== 'none';
+			// Переключаем видимость изображения
+			if (!isImageVisible) {
+				sizeGuideImage.style.display = 'block'; // Показываем изображение
+			} else {
+				sizeGuideImage.style.display = 'none'; // Скрываем изображение
+			}
+		});
 	</script>
+	<script src="script.js"></script>
 </body>
 
 </html>

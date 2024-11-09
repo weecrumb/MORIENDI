@@ -36,7 +36,7 @@
 					echo '
 						<div class="cards__item">
 							<img src="image/' . $el->image . '" alt="кроссовки" class="cards__item-img">
-							<a href="item.php" class="cards__item-link">' . $el->name . '</a>
+							<a href="item.php?id=' . $el->id . '" class="cards__item-link">' . $el->name . '</a>
 							<p class="cards__item-desc">' . $el->price . ' ₽</p>
 						</div>
 						';
