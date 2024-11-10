@@ -23,6 +23,26 @@ if (isset($_GET['id'])) {
 }
 $product['image'] = explode(',', $product['image']);
 $product['size'] = explode(';', $product['size']);
+
+// Обработка добавления товара в корзину
+if (isset($_POST['add_to_cart'])) {
+	$item_id = $productId; // ID товара из URL
+
+	// Получаем текущие товары из куки
+	$cart = isset($_COOKIE['cart']) ? json_decode($_COOKIE['cart'], true) : [];
+
+	// Добавляем товар в корзину, если его там еще нет
+	if (!in_array($item_id, $cart)) {
+		$cart[] = $item_id;
+	}
+
+	// Сохраняем обновленный массив в куки
+	setcookie('cart', json_encode($cart), time() + (86400 * 30), "/"); // Кука хранится 30 дней
+
+	// Перенаправление на страницу корзины
+	header("Location: cart.php");
+	exit();
+}
 ?>
 
 <!DOCTYPE html>
@@ -32,7 +52,9 @@ $product['size'] = explode(';', $product['size']);
 	<meta charset="UTF-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>ALEXANDR MORIENDI BUFFS in WHITE - ALEXANDR MORIENDI</title>
+	<title>
+		<?php echo htmlspecialchars($product['name']); ?> - ALEXANDR MORIENDI
+	</title>
 	<link rel="icon" type="image/png" href="image/icon.jpg">
 	<link rel="stylesheet" href="css/reset.css">
 	<link rel="stylesheet" href="css/style.css">
@@ -100,8 +122,10 @@ $product['size'] = explode(';', $product['size']);
 						</option>
 					<?php endforeach; ?>
 				</select>
-				<!-- кнопка заказать -->
-				<button class="btn btn-add">заказать</button>
+				<form action="item.php?id=<?php echo $productId; ?>" method="post">
+					<input type="hidden" name="item_id" value="<?php echo $productId; ?>"> <!-- ID товара -->
+					<button type="submit" name="add_to_cart" class="btn btn-add">Заказать</button>
+				</form>
 			</div>
 		</div>
 		<div class="line"></div>
